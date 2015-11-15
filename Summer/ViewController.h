@@ -10,6 +10,14 @@
 
 @interface ViewController : NSViewController
 
+@property (weak) IBOutlet NSTextField *numberField;
+@property (weak) IBOutlet NSButton *actionButton;
+@property (weak) IBOutlet NSTextField *x2Sum;
+@property (weak) IBOutlet NSTextField *x4Sum;
+- (IBAction)buttonTapped:(id)sender;
+@property (weak) IBOutlet NSTextField *x1Sum;
+@property (weak) IBOutlet NSTextField *ratio;
+@property (weak) IBOutlet NSTextField *x2SumModifier;
 
 @end
 
