@@ -11,6 +11,7 @@
 
 @interface ViewController ()
 
+@property NSMutableArray *permutations;
 @property NSMutableArray *data;
 
 @end;
@@ -22,6 +23,7 @@
     [super viewDidLoad];
 
     // Do any additional setup after loading the view.
+
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -31,10 +33,38 @@
 }
 
 - (IBAction)buttonTapped:(id)sender {
+    //
+//    [self calculateStuff];
+    [self calculatePermutations];
+}
+
+-(void) calculatePermutations {
+    NSString *text = self.numberField.stringValue;
+    NSArray *components = [text componentsSeparatedByString:@","];
+        
+    // init permutations
+    self.permutations =  [[NSMutableArray alloc] initWithArray:@[@"0"]];
+
+    for (NSString *n in components) {
+        NSMutableArray *tempPerms = [[NSMutableArray alloc] initWithArray:self.permutations];
+        
+        for (NSString *p in self.permutations) {
+            NSInteger newPermutation = [p integerValue] + [n integerValue];
+            NSString *newPermStr = [NSString stringWithFormat:@"%ld", newPermutation];
+            [tempPerms addObject:newPermStr];
+        }
+        
+        self.permutations = tempPerms;
+    }
+    
+    self.numberField.stringValue = [self.permutations componentsJoinedByString:@","];
+}
+
+-(void) calculateStuff {
     NSString *text = self.numberField.stringValue;
     
     NSArray *components = [text componentsSeparatedByString:@","];
-
+    
     long x1sum = 0;
     long x2sum = 0;
     long x4sum = 0;
@@ -59,7 +89,26 @@
     self.x2SumModifier.stringValue = [NSString stringWithFormat:@"%lf", x2SumModifier];
     
     NSLog(@"data = %@", components);
+}
+
+- (IBAction)valueChanged:(id)sender {
+    NSStepper *stepper = (NSStepper *)sender;
+    NSInteger v = [stepper integerValue];
     
+    NSString *text = self.numberField.stringValue;
+    
+    NSArray *components = [text componentsSeparatedByString:@","];
+    
+    self.data = [[NSMutableArray alloc] init];
+    for (NSString *s in components) {
+        NSInteger n = [s integerValue];
+        
+        NSInteger y = n + v;
+    }
+    
+    
+    
+    NSLog(@"%ld", v);
 }
 
 

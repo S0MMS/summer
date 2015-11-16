@@ -14,10 +14,15 @@
 @property (weak) IBOutlet NSButton *actionButton;
 @property (weak) IBOutlet NSTextField *x2Sum;
 @property (weak) IBOutlet NSTextField *x4Sum;
-- (IBAction)buttonTapped:(id)sender;
 @property (weak) IBOutlet NSTextField *x1Sum;
 @property (weak) IBOutlet NSTextField *ratio;
 @property (weak) IBOutlet NSTextField *x2SumModifier;
+@property (weak) IBOutlet NSStepper *stepper;
+- (IBAction)buttonTapped:(id)sender;
+- (IBAction)valueChanged:(id)sender;
+
+@property (weak) IBOutlet NSTextField *permutationsField;
 
 @end
+
 
