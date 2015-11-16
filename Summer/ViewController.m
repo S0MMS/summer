@@ -12,6 +12,7 @@
 @interface ViewController ()
 
 @property NSMutableArray *permutations;
+@property NSMutableArray *adjustedPermutations;
 @property NSMutableArray *data;
 
 @end;
@@ -23,7 +24,8 @@
     [super viewDidLoad];
 
     // Do any additional setup after loading the view.
-
+    [self.view.window makeFirstResponder:self];
+//    [self makeFirstResponder:self];
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -33,9 +35,9 @@
 }
 
 - (IBAction)buttonTapped:(id)sender {
-    //
-//    [self calculateStuff];
     [self calculatePermutations];
+    [self calculateStuff];
+    [self.stepper setIntegerValue:0];
 }
 
 -(void) calculatePermutations {
@@ -56,20 +58,21 @@
         
         self.permutations = tempPerms;
     }
-    
-    self.numberField.stringValue = [self.permutations componentsJoinedByString:@","];
+    self.adjustedPermutations = self.permutations;
+    self.permutationsField.stringValue = [self.adjustedPermutations componentsJoinedByString:@","];
+//    self.permutationsField.stringValue = [self.permutations componentsJoinedByString:@","];
 }
 
 -(void) calculateStuff {
-    NSString *text = self.numberField.stringValue;
-    
-    NSArray *components = [text componentsSeparatedByString:@","];
+//    NSString *text = self.permutationsField.stringValue;
+//    
+//    NSArray *components = [text componentsSeparatedByString:@","];
     
     long x1sum = 0;
     long x2sum = 0;
     long x4sum = 0;
     self.data = [[NSMutableArray alloc] init];
-    for (NSString *s in components) {
+    for (NSString *s in self.adjustedPermutations) {
         NSInteger n = [s integerValue];
         x1sum += (n);
         x2sum += (n * n);
@@ -88,30 +91,36 @@
     double x2SumModifier = x2sum/ratio;
     self.x2SumModifier.stringValue = [NSString stringWithFormat:@"%lf", x2SumModifier];
     
-    NSLog(@"data = %@", components);
+//    NSLog(@"data = %@", components);
 }
 
 - (IBAction)valueChanged:(id)sender {
     NSStepper *stepper = (NSStepper *)sender;
     NSInteger v = [stepper integerValue];
+
+    self.adjustedPermutations = [[NSMutableArray alloc] init];
     
-    NSString *text = self.numberField.stringValue;
-    
-    NSArray *components = [text componentsSeparatedByString:@","];
-    
-    self.data = [[NSMutableArray alloc] init];
-    for (NSString *s in components) {
-        NSInteger n = [s integerValue];
+    for (NSString *p in self.permutations) {
+        NSInteger adjustedValue = [p integerValue] + v;
         
-        NSInteger y = n + v;
+        NSString *abs = [NSString stringWithFormat:@"%ld", labs(adjustedValue)];
+        [self.adjustedPermutations addObject:abs];
     }
+    NSLog(@"adjusted perm = %@", self.adjustedPermutations);
     
+    self.permutationsField.stringValue = [self.adjustedPermutations componentsJoinedByString:@","];
     
-    
-    NSLog(@"%ld", v);
+    [self calculateStuff];
 }
 
 
+
+-(void)keyDown:(NSEvent*)event {
+    NSLog(@"key = %@", event);
+}
+- (BOOL)acceptsFirstResponder {
+    return YES;
+}
 
 
 

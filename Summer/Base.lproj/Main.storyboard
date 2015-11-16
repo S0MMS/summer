@@ -756,14 +756,14 @@
                                 </textFieldCell>
                             </textField>
                             <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ivp-Mf-cIy">
-                                <rect key="frame" x="254" y="379" width="19" height="27"/>
+                                <rect key="frame" x="278" y="379" width="19" height="27"/>
                                 <stepperCell key="cell" continuous="YES" alignment="left" minValue="-100" maxValue="100" id="xHs-oo-1NZ"/>
                                 <connections>
                                     <action selector="valueChanged:" target="XfG-lQ-9wD" id="0vq-rC-ND7"/>
                                 </connections>
                             </stepper>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FtG-6e-weX">
-                                <rect key="frame" x="20" y="382" width="229" height="22"/>
+                                <rect key="frame" x="20" y="382" width="260" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="SqR-zL-p5W">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
