@@ -14,6 +14,7 @@
 		BF5ADAF81BF7BCBE0042757B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5ADAF61BF7BCBE0042757B /* Main.storyboard */; };
 		BF5ADB031BF7BCBF0042757B /* SummerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5ADB021BF7BCBF0042757B /* SummerTests.m */; };
 		BF5ADB0E1BF7BCBF0042757B /* SummerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5ADB0D1BF7BCBF0042757B /* SummerUITests.m */; };
+		BF8F6CF81BFFFAB500144647 /* SumView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8F6CF71BFFFAB500144647 /* SumView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,8 @@
 		BF5ADB091BF7BCBF0042757B /* SummerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SummerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF5ADB0D1BF7BCBF0042757B /* SummerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SummerUITests.m; sourceTree = "<group>"; };
 		BF5ADB0F1BF7BCBF0042757B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF8F6CF61BFFFAB500144647 /* SumView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SumView.h; sourceTree = "<group>"; };
+		BF8F6CF71BFFFAB500144647 /* SumView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SumView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +110,8 @@
 				BF5ADAF61BF7BCBE0042757B /* Main.storyboard */,
 				BF5ADAF91BF7BCBE0042757B /* Info.plist */,
 				BF5ADAEE1BF7BCBE0042757B /* Supporting Files */,
+				BF8F6CF61BFFFAB500144647 /* SumView.h */,
+				BF8F6CF71BFFFAB500144647 /* SumView.m */,
 			);
 			path = Summer;
 			sourceTree = "<group>";
@@ -266,6 +271,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF8F6CF81BFFFAB500144647 /* SumView.m in Sources */,
 				BF5ADAF31BF7BCBE0042757B /* ViewController.m in Sources */,
 				BF5ADAF01BF7BCBE0042757B /* main.m in Sources */,
 				BF5ADAED1BF7BCBE0042757B /* AppDelegate.m in Sources */,
@@ -489,6 +495,7 @@
 				BF5ADB141BF7BCBF0042757B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BF5ADB151BF7BCBF0042757B /* Build configuration list for PBXNativeTarget "SummerTests" */ = {
 			isa = XCConfigurationList;
@@ -497,6 +504,7 @@
 				BF5ADB171BF7BCBF0042757B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BF5ADB181BF7BCBF0042757B /* Build configuration list for PBXNativeTarget "SummerUITests" */ = {
 			isa = XCConfigurationList;
@@ -505,6 +513,7 @@
 				BF5ADB1A1BF7BCBF0042757B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
