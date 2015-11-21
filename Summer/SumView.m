@@ -32,6 +32,9 @@
         [self drawGrid];
         [self drawPermutations];
         
+        
+        [self drawSorted];
+        
     }
 }
 
@@ -49,9 +52,7 @@
 }
 
 -(void) drawGrid {
-//    float gridCellWidth = self.frame.size.width/self.permutations.count;
-//    float gridCellHeight = self.frame.size.height/self.permutations.count;
-    
+
     NSBezierPath *line = [NSBezierPath bezierPath];
     [line setLineWidth:0.5];
     [[NSColor grayColor] set];
@@ -98,5 +99,12 @@
 
     }
 }
+
+
+-(void) drawSorted {
+    
+
+}
+
 
 @end
