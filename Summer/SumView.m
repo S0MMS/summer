@@ -81,20 +81,21 @@
     NSBezierPath *line = [NSBezierPath bezierPath];
     [line setLineWidth:2];
     [[NSColor blueColor] set];
-    
-//    float gridCellWidth = self.frame.size.width/self.permutations.count;
-//    float gridCellHeight = self.frame.size.height/self.permutations.count;
-    
-    
+
+    [line moveToPoint:NSMakePoint(NSMinX([self bounds]), NSMinY([self bounds]))];
+     
     for (int i = 0; i < self.permutations.count; i++) {
         float x = i * self.gridCellWidth;
+
         NSString *pStr = self.permutations[i];
         float p = [pStr floatValue];
         float y = p * self.gridCellHeight;
-
-        [line moveToPoint:NSMakePoint(x, y)];
-        [line lineToPoint:NSMakePoint(x + self.gridCellWidth, y)];
+        
+        
+        [line lineToPoint:NSMakePoint(x, y)];
+        [line lineToPoint:NSMakePoint(x + self.gridCellWidth, y)];        
         [line stroke];
+
     }
 }
 
