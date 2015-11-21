@@ -9,7 +9,8 @@
 #import "SumView.h"
 
 @interface SumView ()
-
+@property double gridCellWidth;
+@property double gridCellHeight;
 @end
 
 @implementation SumView
@@ -19,16 +20,82 @@
     [[NSColor whiteColor] set];
     NSRectFill(dirtyRect);
     
+    [self drawBorder];
     
-    float gridCellWidth = self.frame.size.width/self.permutations.count;
-    float gridCellHeight = self.frame.size.height/self.permutations.count;
+    if (self.permutations) {
+        self.gridCellWidth = self.frame.size.width/self.permutations.count;
+        
+        NSString *hiValStr = [self.permutations lastObject];
+        double hiVal = [hiValStr doubleValue];
+        self.gridCellHeight = self.frame.size.height/hiVal;
+        
+        [self drawGrid];
+        [self drawPermutations];
+        
+    }
+}
+
+-(void) drawBorder {
+    NSBezierPath *line = [NSBezierPath bezierPath];
+    [line setLineWidth:1];
+    [[NSColor blackColor] set];
+    
+    [line moveToPoint:NSMakePoint(NSMinX([self bounds]), NSMinY([self bounds]))];
+    [line lineToPoint:NSMakePoint(NSMinX([self bounds]), NSMaxY([self bounds]))];
+    [line lineToPoint:NSMakePoint(NSMaxX([self bounds]), NSMaxY([self bounds]))];
+    [line lineToPoint:NSMakePoint(NSMaxX([self bounds]), NSMinY([self bounds]))];
+    [line lineToPoint:NSMakePoint(NSMinX([self bounds]), NSMinY([self bounds]))];
+    [line stroke];
+}
+
+-(void) drawGrid {
+//    float gridCellWidth = self.frame.size.width/self.permutations.count;
+//    float gridCellHeight = self.frame.size.height/self.permutations.count;
     
     NSBezierPath *line = [NSBezierPath bezierPath];
-    [line moveToPoint:NSMakePoint(NSMinX([self bounds]), NSMinY([self bounds]))];
-    [line lineToPoint:NSMakePoint(NSMaxX([self bounds]), NSMaxY([self bounds]))];
     [line setLineWidth:0.5];
     [[NSColor grayColor] set];
-    [line stroke];
+    
+    
+    // draw vertical lines
+    for (int i = 1; i < self.permutations.count; i++) {
+        float x = i * self.gridCellWidth;
+        [line moveToPoint:NSMakePoint(x, NSMinY([self bounds]))];
+        [line lineToPoint:NSMakePoint(x, NSMaxY([self bounds]))];
+        [line stroke];
+    }
+    
+    
+    // draw horizontal lines
+    for (int i = 1; i <= self.permutations.count; i++) {
+        float y = i * self.gridCellHeight;
+        [line moveToPoint:NSMakePoint(NSMinX([self bounds]), y)];
+        [line lineToPoint:NSMakePoint(NSMaxX([self bounds]), y)];
+        [line stroke];
+    }
     
 }
+
+
+-(void) drawPermutations {
+    NSBezierPath *line = [NSBezierPath bezierPath];
+    [line setLineWidth:2];
+    [[NSColor blueColor] set];
+    
+//    float gridCellWidth = self.frame.size.width/self.permutations.count;
+//    float gridCellHeight = self.frame.size.height/self.permutations.count;
+    
+    
+    for (int i = 0; i < self.permutations.count; i++) {
+        float x = i * self.gridCellWidth;
+        NSString *pStr = self.permutations[i];
+        float p = [pStr floatValue];
+        float y = p * self.gridCellHeight;
+
+        [line moveToPoint:NSMakePoint(x, y)];
+        [line lineToPoint:NSMakePoint(x + self.gridCellWidth, y)];
+        [line stroke];
+    }
+}
+
 @end

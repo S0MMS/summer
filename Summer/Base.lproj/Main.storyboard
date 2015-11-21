@@ -780,6 +780,7 @@
                         <outlet property="permutationsField" destination="FtG-6e-weX" id="qDO-Ih-tZL"/>
                         <outlet property="ratio" destination="8Na-v5-W09" id="0ou-gE-gJ9"/>
                         <outlet property="stepper" destination="ivp-Mf-cIy" id="ebf-rn-Po2"/>
+                        <outlet property="sumView" destination="BJI-pM-MVq" id="dHc-68-oxs"/>
                         <outlet property="x1Sum" destination="nTn-CT-tmh" id="GcJ-li-hvA"/>
                         <outlet property="x2Sum" destination="IJl-Vg-d7I" id="lDf-rs-t20"/>
                         <outlet property="x2SumModifier" destination="cm7-GT-krN" id="14U-ci-7rF"/>

@@ -38,6 +38,9 @@
     [self calculatePermutations];
     [self calculateStuff];
     [self.stepper setIntegerValue:0];
+    
+    self.sumView.permutations = self.permutations;
+    [self.sumView setNeedsDisplay:YES];
 }
 
 -(void) calculatePermutations {

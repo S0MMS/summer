@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "SumView.h"
 
 @interface ViewController : NSViewController
 
@@ -22,6 +23,7 @@
 - (IBAction)valueChanged:(id)sender;
 
 @property (weak) IBOutlet NSTextField *permutationsField;
+@property (weak) IBOutlet SumView *sumView;
 
 @end
 
