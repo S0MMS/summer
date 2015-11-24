@@ -30,6 +30,9 @@
     self.gridCheckbox.state = YES;
     self.sumView.showGrid = self.gridCheckbox.state;
     
+    self.permutationsCheckbox.state = YES;
+    self.sumView.showPermutations = self.permutationsCheckbox.state;
+    
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -125,16 +128,18 @@
 -(void)keyDown:(NSEvent*)event {
     NSLog(@"key = %@", event);
 }
+
 - (BOOL)acceptsFirstResponder {
     return YES;
 }
 
-
 - (IBAction)gridCheckboxTapped:(id)sender {
-    NSLog(@"checkbox = %ld", self.gridCheckbox.state);
-    
     self.sumView.showGrid = self.gridCheckbox.state;
     [self.sumView setNeedsDisplay:YES];
 }
 
+- (IBAction)permutationsCheckboxTapped:(id)sender {
+    self.sumView.showPermutations = self.permutationsCheckbox.state;
+    [self.sumView setNeedsDisplay:YES];
+}
 @end

@@ -783,11 +783,22 @@
                                     <action selector="gridCheckboxTapped:" target="XfG-lQ-9wD" id="paA-kc-GGu"/>
                                 </connections>
                             </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ohT-l0-D6D">
+                                <rect key="frame" x="806" y="620" width="112" height="18"/>
+                                <buttonCell key="cell" type="check" title="Permutations" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="lax-SI-vWV">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="permutationsCheckboxTapped:" target="XfG-lQ-9wD" id="1hf-in-3UY"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="gridCheckbox" destination="LlM-ZY-P3G" id="OjM-l0-3Ad"/>
                         <outlet property="numberField" destination="idR-NV-fHo" id="yX1-k9-6NK"/>
+                        <outlet property="permutationsCheckbox" destination="ohT-l0-D6D" id="zL9-t7-S8W"/>
                         <outlet property="permutationsField" destination="FtG-6e-weX" id="qDO-Ih-tZL"/>
                         <outlet property="ratio" destination="8Na-v5-W09" id="0ou-gE-gJ9"/>
                         <outlet property="stepper" destination="ivp-Mf-cIy" id="ebf-rn-Po2"/>

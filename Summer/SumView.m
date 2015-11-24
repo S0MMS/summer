@@ -35,10 +35,12 @@
 
         NSBezierPath *line;
         
-        line = [NSBezierPath bezierPath];
-        [line setLineWidth:1.5];
-        [[NSColor blackColor] set];
-        [self drawArray:self.permutations withLine:line];
+        if (self.showPermutations) {
+            line = [NSBezierPath bezierPath];
+            [line setLineWidth:1.5];
+            [[NSColor blackColor] set];
+            [self drawArray:self.permutations withLine:line];
+        }
         
         line = [NSBezierPath bezierPath];
         [line setLineWidth:1.5];
