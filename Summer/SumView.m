@@ -30,11 +30,18 @@
         self.gridCellHeight = self.frame.size.height/hiVal;
         
         [self drawGrid];
-        [self drawPermutations];
+        NSBezierPath *line;
         
+        line = [NSBezierPath bezierPath];
+        [line setLineWidth:1.5];
+        [[NSColor blackColor] set];
+        [self drawArray:self.permutations withLine:line];
         
-        [self drawSorted];
-        
+        line = [NSBezierPath bezierPath];
+        [line setLineWidth:1.5];
+        [[NSColor blueColor] set];
+        NSArray *sorted = [self sortPermutations];
+        [self drawArray:sorted withLine:line];
     }
 }
 
@@ -54,7 +61,7 @@
 -(void) drawGrid {
 
     NSBezierPath *line = [NSBezierPath bezierPath];
-    [line setLineWidth:0.5];
+    [line setLineWidth:0.25];
     [[NSColor grayColor] set];
     
     
@@ -68,7 +75,9 @@
     
     
     // draw horizontal lines
-    for (int i = 1; i <= self.permutations.count; i++) {
+    NSString *maxString = [self.permutations lastObject];
+    NSInteger max = [maxString integerValue];
+    for (int i = 1; i <= max; i++) {
         float y = i * self.gridCellHeight;
         [line moveToPoint:NSMakePoint(NSMinX([self bounds]), y)];
         [line lineToPoint:NSMakePoint(NSMaxX([self bounds]), y)];
@@ -78,33 +87,66 @@
 }
 
 
--(void) drawPermutations {
-    NSBezierPath *line = [NSBezierPath bezierPath];
-    [line setLineWidth:2];
-    [[NSColor blueColor] set];
+//-(void) drawPermutations {
+//    NSBezierPath *line = [NSBezierPath bezierPath];
+//    [line setLineWidth:1.5];
+//    [[NSColor blackColor] set];
+//
+//    [line moveToPoint:NSMakePoint(NSMinX([self bounds]), NSMinY([self bounds]))];
+//     
+//    for (int i = 0; i < self.permutations.count; i++) {
+//        float x = i * self.gridCellWidth;
+//
+//        NSString *pStr = self.permutations[i];
+//        float p = [pStr floatValue];
+//        float y = p * self.gridCellHeight;
+//        
+//        
+//        [line lineToPoint:NSMakePoint(x, y)];
+//        [line lineToPoint:NSMakePoint(x + self.gridCellWidth, y)];        
+//        [line stroke];
+//    }
+//}
 
+-(void) drawArray:(NSArray *)data withLine:(NSBezierPath *)line{
+//    NSBezierPath *line = [NSBezierPath bezierPath];
+//    [line setLineWidth:1.5];
+//    [[NSColor blackColor] set];
+    
     [line moveToPoint:NSMakePoint(NSMinX([self bounds]), NSMinY([self bounds]))];
-     
-    for (int i = 0; i < self.permutations.count; i++) {
+    
+    for (int i = 0; i < data.count; i++) {
         float x = i * self.gridCellWidth;
-
-        NSString *pStr = self.permutations[i];
+        
+        NSString *pStr = data[i];
         float p = [pStr floatValue];
         float y = p * self.gridCellHeight;
         
         
         [line lineToPoint:NSMakePoint(x, y)];
-        [line lineToPoint:NSMakePoint(x + self.gridCellWidth, y)];        
+        [line lineToPoint:NSMakePoint(x + self.gridCellWidth, y)];
         [line stroke];
-
     }
 }
 
 
--(void) drawSorted {
+-(NSArray *) sortPermutations {
+    NSMutableArray *blah = [[NSMutableArray alloc] init];
     
+    for (NSString *pStr in self.permutations) {
+        NSInteger p = [pStr integerValue];
+        NSNumber *n = [NSNumber numberWithInteger:p];
+        [blah addObject:n];
+    }
+    
+    NSArray *sorted = [blah sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        if (obj1 < obj2) return NSOrderedAscending;
+        else if (obj1 > obj2) return NSOrderedDescending;
+        return NSOrderedSame;
+    }];
 
+    NSLog(@"sorted = %@", sorted);
+    return sorted;
 }
-
 
 @end
