@@ -26,6 +26,10 @@
     // Do any additional setup after loading the view.
     [self.view.window makeFirstResponder:self];
 //    [self makeFirstResponder:self];
+    
+    self.gridCheckbox.state = YES;
+    self.sumView.showGrid = self.gridCheckbox.state;
+    
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -126,5 +130,11 @@
 }
 
 
+- (IBAction)gridCheckboxTapped:(id)sender {
+    NSLog(@"checkbox = %ld", self.gridCheckbox.state);
+    
+    self.sumView.showGrid = self.gridCheckbox.state;
+    [self.sumView setNeedsDisplay:YES];
+}
 
 @end

@@ -24,6 +24,8 @@
 
 @property (weak) IBOutlet NSTextField *permutationsField;
 @property (weak) IBOutlet SumView *sumView;
+@property (weak) IBOutlet NSButton *gridCheckbox;
+- (IBAction)gridCheckboxTapped:(id)sender;
 
 @end
 

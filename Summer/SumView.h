@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong) NSArray *permutations;
 
+@property BOOL showGrid;
+
 @end

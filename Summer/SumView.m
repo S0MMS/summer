@@ -29,7 +29,10 @@
         double hiVal = [hiValStr doubleValue];
         self.gridCellHeight = self.frame.size.height/hiVal;
         
-        [self drawGrid];
+        if (self.showGrid) {
+            [self drawGrid];
+        }
+
         NSBezierPath *line;
         
         line = [NSBezierPath bezierPath];
@@ -62,7 +65,7 @@
 
     NSBezierPath *line = [NSBezierPath bezierPath];
     [line setLineWidth:0.25];
-    [[NSColor grayColor] set];
+    [[NSColor lightGrayColor] set];
     
     
     // draw vertical lines

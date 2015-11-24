@@ -674,7 +674,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="idR-NV-fHo">
-                                <rect key="frame" x="768" y="728" width="200" height="22"/>
+                                <rect key="frame" x="809" y="728" width="160" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="0pL-jl-e3W">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -753,7 +753,7 @@
                                 </connections>
                             </stepper>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FtG-6e-weX">
-                                <rect key="frame" x="768" y="757" width="200" height="22"/>
+                                <rect key="frame" x="809" y="757" width="160" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="SqR-zL-p5W">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -761,10 +761,10 @@
                                 </textFieldCell>
                             </textField>
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BJI-pM-MVq" customClass="SumView">
-                                <rect key="frame" x="0.0" y="50" width="750" height="750"/>
+                                <rect key="frame" x="0.0" y="0.0" width="800" height="800"/>
                             </customView>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mru-0P-c6g">
-                                <rect key="frame" x="827" y="692" width="82" height="32"/>
+                                <rect key="frame" x="848" y="692" width="82" height="32"/>
                                 <buttonCell key="cell" type="push" title="Go" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mOk-Vo-IPw">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -773,9 +773,20 @@
                                     <action selector="buttonTapped:" target="XfG-lQ-9wD" id="Rlm-xn-hfz"/>
                                 </connections>
                             </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LlM-ZY-P3G">
+                                <rect key="frame" x="807" y="647" width="49" height="18"/>
+                                <buttonCell key="cell" type="check" title="Grid" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="yBz-kJ-IZe">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="gridCheckboxTapped:" target="XfG-lQ-9wD" id="paA-kc-GGu"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="gridCheckbox" destination="LlM-ZY-P3G" id="OjM-l0-3Ad"/>
                         <outlet property="numberField" destination="idR-NV-fHo" id="yX1-k9-6NK"/>
                         <outlet property="permutationsField" destination="FtG-6e-weX" id="qDO-Ih-tZL"/>
                         <outlet property="ratio" destination="8Na-v5-W09" id="0ou-gE-gJ9"/>
