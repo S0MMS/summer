@@ -804,8 +804,32 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZIX-wn-anq">
-                                <rect key="frame" x="808" y="570" width="38" height="17"/>
+                                <rect key="frame" x="806" y="570" width="60" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Mean" id="EtL-aL-C3W">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qcp-bt-CSk">
+                                <rect key="frame" x="870" y="570" width="101" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="17.3" id="2qr-1V-abs">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XlZ-wu-bi6">
+                                <rect key="frame" x="806" y="547" width="60" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Variance" id="fSM-FI-OGp">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g3r-gG-ZD4">
+                                <rect key="frame" x="870" y="547" width="101" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="5.4" id="jzV-lj-ZVh">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -815,6 +839,7 @@
                     </view>
                     <connections>
                         <outlet property="gridCheckbox" destination="LlM-ZY-P3G" id="OjM-l0-3Ad"/>
+                        <outlet property="meanValue" destination="qcp-bt-CSk" id="Znd-Iz-Ct9"/>
                         <outlet property="numberField" destination="idR-NV-fHo" id="yX1-k9-6NK"/>
                         <outlet property="permutationsCheckbox" destination="ohT-l0-D6D" id="zL9-t7-S8W"/>
                         <outlet property="permutationsField" destination="FtG-6e-weX" id="qDO-Ih-tZL"/>
@@ -822,6 +847,7 @@
                         <outlet property="sortedCheckbox" destination="GvA-7k-qCE" id="gwf-jO-tfJ"/>
                         <outlet property="stepper" destination="ivp-Mf-cIy" id="ebf-rn-Po2"/>
                         <outlet property="sumView" destination="BJI-pM-MVq" id="dHc-68-oxs"/>
+                        <outlet property="varianceValue" destination="g3r-gG-ZD4" id="8TM-W9-Y39"/>
                         <outlet property="x1Sum" destination="nTn-CT-tmh" id="GcJ-li-hvA"/>
                         <outlet property="x2Sum" destination="IJl-Vg-d7I" id="lDf-rs-t20"/>
                         <outlet property="x2SumModifier" destination="cm7-GT-krN" id="14U-ci-7rF"/>

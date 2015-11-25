@@ -34,6 +34,10 @@
 @property (weak) IBOutlet NSButton *sortedCheckbox;
 - (IBAction)sortedCheckboxTapped:(id)sender;
 
+@property (weak) IBOutlet NSTextField *meanValue;
+@property (weak) IBOutlet NSTextField *varianceValue;
+
+
 @end
 
 
