@@ -25,13 +25,15 @@
 
     // Do any additional setup after loading the view.
     [self.view.window makeFirstResponder:self];
-//    [self makeFirstResponder:self];
     
     self.gridCheckbox.state = YES;
     self.sumView.showGrid = self.gridCheckbox.state;
     
     self.permutationsCheckbox.state = YES;
     self.sumView.showPermutations = self.permutationsCheckbox.state;
+    
+    self.sortedCheckbox.state = YES;
+    self.sumView.showSorted = self.sortedCheckbox.state;
     
 }
 
@@ -44,6 +46,7 @@
 - (IBAction)buttonTapped:(id)sender {
     [self calculatePermutations];
     [self calculateStuff];
+    [self calculateStats];
     [self.stepper setIntegerValue:0];
     
     self.sumView.permutations = self.permutations;
@@ -70,14 +73,10 @@
     }
     self.adjustedPermutations = self.permutations;
     self.permutationsField.stringValue = [self.adjustedPermutations componentsJoinedByString:@","];
-//    self.permutationsField.stringValue = [self.permutations componentsJoinedByString:@","];
 }
 
 -(void) calculateStuff {
-//    NSString *text = self.permutationsField.stringValue;
-//    
-//    NSArray *components = [text componentsSeparatedByString:@","];
-    
+
     long x1sum = 0;
     long x2sum = 0;
     long x4sum = 0;
@@ -102,6 +101,18 @@
     self.x2SumModifier.stringValue = [NSString stringWithFormat:@"%lf", x2SumModifier];
     
 //    NSLog(@"data = %@", components);
+}
+
+-(void) calculateStats {
+    // calculate mean
+    NSString *text = self.numberField.stringValue;
+    NSArray *components = [text componentsSeparatedByString:@","];
+    NSInteger height = 0;
+    for (NSString *n in components) {
+        height += [n integerValue];
+    }
+    
+    NSLog(@"height = %ld", height);
 }
 
 - (IBAction)valueChanged:(id)sender {
@@ -142,4 +153,10 @@
     self.sumView.showPermutations = self.permutationsCheckbox.state;
     [self.sumView setNeedsDisplay:YES];
 }
+
+- (IBAction)sortedCheckboxTapped:(id)sender {
+    self.sumView.showSorted = self.sortedCheckbox.state;
+    [self.sumView setNeedsDisplay:YES];
+}
+
 @end

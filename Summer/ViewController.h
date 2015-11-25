@@ -31,6 +31,8 @@
 @property (weak) IBOutlet NSButton *permutationsCheckbox;
 - (IBAction)permutationsCheckboxTapped:(id)sender;
 
+@property (weak) IBOutlet NSButton *sortedCheckbox;
+- (IBAction)sortedCheckboxTapped:(id)sender;
 
 @end
 

@@ -33,20 +33,25 @@
             [self drawGrid];
         }
 
-        NSBezierPath *line;
         
+        NSBezierPath *line;
+                
+        // show permutations
         if (self.showPermutations) {
             line = [NSBezierPath bezierPath];
-            [line setLineWidth:1.5];
+            [line setLineWidth:1.0];
             [[NSColor blackColor] set];
             [self drawArray:self.permutations withLine:line];
         }
         
-        line = [NSBezierPath bezierPath];
-        [line setLineWidth:1.5];
-        [[NSColor blueColor] set];
-        NSArray *sorted = [self sortPermutations];
-        [self drawArray:sorted withLine:line];
+        // show sorted
+        if (self.showSorted) {
+            line = [NSBezierPath bezierPath];
+            [line setLineWidth:1.5];
+            [[NSColor blueColor] set];
+            NSArray *sorted = [self sortPermutations];
+            [self drawArray:sorted withLine:line];
+        }
     }
 }
 

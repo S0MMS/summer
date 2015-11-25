@@ -14,5 +14,6 @@
 
 @property BOOL showGrid;
 @property BOOL showPermutations;
+@property BOOL showSorted;
 
 @end
