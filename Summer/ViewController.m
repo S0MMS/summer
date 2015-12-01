@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import <math.h>
 
 
 @interface ViewController ()
@@ -34,6 +35,10 @@
     
     self.sortedCheckbox.state = YES;
     self.sumView.showSorted = self.sortedCheckbox.state;
+    
+    self.meanValue.stringValue = @"";
+    
+    self.varianceValue.stringValue = @"";
     
 }
 
@@ -107,12 +112,31 @@
     // calculate mean
     NSString *text = self.numberField.stringValue;
     NSArray *components = [text componentsSeparatedByString:@","];
-    NSInteger height = 0;
+    double height = 0;
     for (NSString *n in components) {
-        height += [n integerValue];
+        height += [n doubleValue];
     }
     
-    NSLog(@"height = %ld", height);
+    NSLog(@"height = %f", height);
+    double mean = height/2.0;
+    
+    self.meanValue.stringValue = [NSString stringWithFormat:@"%f", mean];
+    
+    // calculate variance
+    long x2sum = 0;
+    for (NSString *pStr in self.permutations) {
+        double n = [pStr doubleValue];
+        double diff = (mean - n);
+        x2sum += (diff * diff);
+    }
+    
+    double variance = x2sum/([self.permutations count]);
+    self.varianceValue.stringValue = [NSString stringWithFormat:@"%f", variance];
+    
+    
+    // calculate std dev
+    double stdDev = sqrt(variance);
+    self.stdDevValue.stringValue = [NSString stringWithFormat:@"%f", stdDev];
 }
 
 - (IBAction)valueChanged:(id)sender {
@@ -158,5 +182,16 @@
     self.sumView.showSorted = self.sortedCheckbox.state;
     [self.sumView setNeedsDisplay:YES];
 }
+
+
+double cumulativeNormal(double x) {
+    return 0.5 * erfc(-x * M_SQRT1_2);
+}
+
+double cumulativeNormalWithMeanAndVariance(double x, double mean, double variance) {
+    return 0.5 * erfc(((mean - x)/sqrt(variance)) * M_SQRT1_2);
+}
+
+
 
 @end

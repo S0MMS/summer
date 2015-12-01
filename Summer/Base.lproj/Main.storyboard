@@ -827,9 +827,25 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Ra-Va-ziy">
+                                <rect key="frame" x="807" y="524" width="60" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Std. Dev." id="BnO-7u-gLu">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g3r-gG-ZD4">
                                 <rect key="frame" x="870" y="547" width="101" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="5.4" id="jzV-lj-ZVh">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dNA-ED-iPt">
+                                <rect key="frame" x="870" y="524" width="101" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="2.1" id="Vnc-Q2-icO">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -845,6 +861,7 @@
                         <outlet property="permutationsField" destination="FtG-6e-weX" id="qDO-Ih-tZL"/>
                         <outlet property="ratio" destination="8Na-v5-W09" id="0ou-gE-gJ9"/>
                         <outlet property="sortedCheckbox" destination="GvA-7k-qCE" id="gwf-jO-tfJ"/>
+                        <outlet property="stdDevValue" destination="dNA-ED-iPt" id="uXr-ZW-Dzi"/>
                         <outlet property="stepper" destination="ivp-Mf-cIy" id="ebf-rn-Po2"/>
                         <outlet property="sumView" destination="BJI-pM-MVq" id="dHc-68-oxs"/>
                         <outlet property="varianceValue" destination="g3r-gG-ZD4" id="8TM-W9-Y39"/>
