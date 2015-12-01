@@ -52,6 +52,12 @@
             NSArray *sorted = [self sortPermutations];
             [self drawArray:sorted withLine:line];
         }
+        
+        
+        // show cdf
+        if (self.showCDF) {
+            NSLog(@"booyaa!");
+        }
     }
 }
 

@@ -36,6 +36,9 @@
     self.sortedCheckbox.state = YES;
     self.sumView.showSorted = self.sortedCheckbox.state;
     
+    self.cdfCheckbox.state = YES;
+    self.sumView.showCDF = self.cdfCheckbox.state;
+    
     self.meanValue.stringValue = @"";
     
     self.varianceValue.stringValue = @"";
@@ -192,6 +195,14 @@ double cumulativeNormalWithMeanAndVariance(double x, double mean, double varianc
     return 0.5 * erfc(((mean - x)/sqrt(variance)) * M_SQRT1_2);
 }
 
+double cdf(double x, double mean, double stdDev) {
+    return (1/2)*(1 + erfc( (x - mean)/(stdDev * M_SQRT2) ));
+}
 
+
+- (IBAction)cdfCheckboxTapped:(id)sender {
+    self.sumView.showCDF = self.cdfCheckbox.state;
+    [self.sumView setNeedsDisplay:YES];
+}
 
 @end
