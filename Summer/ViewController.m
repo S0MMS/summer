@@ -12,6 +12,7 @@
 
 @interface ViewController ()
 
+@property NSMutableArray *components;
 @property NSMutableArray *permutations;
 @property NSMutableArray *adjustedPermutations;
 @property NSMutableArray *data;
@@ -52,6 +53,7 @@
 }
 
 - (IBAction)buttonTapped:(id)sender {
+    [self readComponents];
     [self calculatePermutations];
     [self calculateStuff];
     [self calculateStats];
@@ -61,21 +63,30 @@
     [self.sumView setNeedsDisplay:YES];
 }
 
--(void) calculatePermutations {
+-(void) readComponents {
+    self.components = [[NSMutableArray alloc] init];
+    
     NSString *text = self.numberField.stringValue;
     NSArray *components = [text componentsSeparatedByString:@","];
-        
-    // init permutations
-    self.permutations =  [[NSMutableArray alloc] initWithArray:@[@"0"]];
+    for (NSString *c in components) {
+        NSNumber *n = [NSNumber numberWithInteger:[c integerValue]];
+        [self.components addObject:n];
+    }
+}
 
-    for (NSString *n in components) {
+-(void) calculatePermutations {
+
+    self.permutations = [[NSMutableArray alloc] init];
+    [self.permutations addObject:[NSNumber numberWithInt:0]];
+
+    for (NSNumber *n in self.components) {
         NSMutableArray *tempPerms = [[NSMutableArray alloc] initWithArray:self.permutations];
-        
-        for (NSString *p in self.permutations) {
-            NSInteger newPermutation = [p integerValue] + [n integerValue];
-            NSString *newPermStr = [NSString stringWithFormat:@"%ld", newPermutation];
-            [tempPerms addObject:newPermStr];
+
+        for (NSNumber *p in self.permutations) {
+            NSNumber *newPermutation = [NSNumber numberWithInteger:([p integerValue] + [n integerValue])];;
+            [tempPerms addObject:newPermutation];
         }
+        
         
         self.permutations = tempPerms;
     }
@@ -89,7 +100,7 @@
     long x2sum = 0;
     long x4sum = 0;
     self.data = [[NSMutableArray alloc] init];
-    for (NSString *s in self.adjustedPermutations) {
+    for (NSNumber *s in self.adjustedPermutations) {
         NSInteger n = [s integerValue];
         x1sum += (n);
         x2sum += (n * n);
@@ -113,10 +124,8 @@
 
 -(void) calculateStats {
     // calculate mean
-    NSString *text = self.numberField.stringValue;
-    NSArray *components = [text componentsSeparatedByString:@","];
     double height = 0;
-    for (NSString *n in components) {
+    for (NSNumber *n in self.components) {
         height += [n doubleValue];
     }
     
@@ -126,11 +135,11 @@
     self.meanValue.stringValue = [NSString stringWithFormat:@"%f", mean];
     
     // calculate variance
-    long x2sum = 0;
-    for (NSString *pStr in self.permutations) {
-        double n = [pStr doubleValue];
+    double x2sum = 0;
+    for (NSNumber *p in self.permutations) {
+        double n = [p doubleValue];
         double diff = (mean - n);
-        x2sum += (diff * diff);
+        x2sum = x2sum + pow(diff, 2);
     }
     
     double variance = x2sum/([self.permutations count]);

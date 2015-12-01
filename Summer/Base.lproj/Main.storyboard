@@ -764,7 +764,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="800" height="800"/>
                             </customView>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mru-0P-c6g">
-                                <rect key="frame" x="848" y="692" width="82" height="32"/>
+                                <rect key="frame" x="848" y="613" width="82" height="32"/>
                                 <buttonCell key="cell" type="push" title="Go" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mOk-Vo-IPw">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -774,7 +774,7 @@
                                 </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LlM-ZY-P3G">
-                                <rect key="frame" x="807" y="647" width="49" height="18"/>
+                                <rect key="frame" x="807" y="570" width="49" height="18"/>
                                 <buttonCell key="cell" type="check" title="Grid" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="yBz-kJ-IZe">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -784,7 +784,7 @@
                                 </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ohT-l0-D6D">
-                                <rect key="frame" x="806" y="620" width="112" height="18"/>
+                                <rect key="frame" x="806" y="543" width="112" height="18"/>
                                 <buttonCell key="cell" type="check" title="Permutations" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="lax-SI-vWV">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -794,7 +794,7 @@
                                 </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GvA-7k-qCE">
-                                <rect key="frame" x="806" y="593" width="62" height="18"/>
+                                <rect key="frame" x="806" y="516" width="62" height="18"/>
                                 <buttonCell key="cell" type="check" title="Sorted" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="u4I-3D-pk1">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -804,7 +804,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZIX-wn-anq">
-                                <rect key="frame" x="806" y="499" width="60" height="17"/>
+                                <rect key="frame" x="806" y="444" width="60" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Mean" id="EtL-aL-C3W">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -812,7 +812,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qcp-bt-CSk">
-                                <rect key="frame" x="870" y="499" width="101" height="17"/>
+                                <rect key="frame" x="870" y="444" width="101" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="17.3" id="2qr-1V-abs">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -820,7 +820,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XlZ-wu-bi6">
-                                <rect key="frame" x="806" y="476" width="60" height="17"/>
+                                <rect key="frame" x="806" y="421" width="60" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Variance" id="fSM-FI-OGp">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -828,7 +828,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Ra-Va-ziy">
-                                <rect key="frame" x="807" y="453" width="60" height="17"/>
+                                <rect key="frame" x="807" y="398" width="60" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Std. Dev." id="BnO-7u-gLu">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -836,7 +836,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g3r-gG-ZD4">
-                                <rect key="frame" x="870" y="476" width="101" height="17"/>
+                                <rect key="frame" x="870" y="421" width="101" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="5.4" id="jzV-lj-ZVh">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -844,7 +844,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dNA-ED-iPt">
-                                <rect key="frame" x="870" y="453" width="101" height="17"/>
+                                <rect key="frame" x="870" y="398" width="101" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="2.1" id="Vnc-Q2-icO">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -852,7 +852,7 @@
                                 </textFieldCell>
                             </textField>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MIB-41-pLo">
-                                <rect key="frame" x="806" y="566" width="62" height="18"/>
+                                <rect key="frame" x="806" y="489" width="62" height="18"/>
                                 <buttonCell key="cell" type="check" title="CDF" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="V1k-nn-NVn">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -861,11 +861,20 @@
                                     <action selector="cdfCheckboxTapped:" target="XfG-lQ-9wD" id="lUY-3y-TOf"/>
                                 </connections>
                             </button>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k16-Xz-x0G">
+                                <rect key="frame" x="808" y="650" width="160" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="MYg-P4-xLK">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="cdfCheckbox" destination="MIB-41-pLo" id="14G-mT-vKc"/>
                         <outlet property="gridCheckbox" destination="LlM-ZY-P3G" id="OjM-l0-3Ad"/>
+                        <outlet property="hLinesField" destination="k16-Xz-x0G" id="7G3-Hj-QTQ"/>
                         <outlet property="meanValue" destination="qcp-bt-CSk" id="Znd-Iz-Ct9"/>
                         <outlet property="numberField" destination="idR-NV-fHo" id="yX1-k9-6NK"/>
                         <outlet property="permutationsCheckbox" destination="ohT-l0-D6D" id="zL9-t7-S8W"/>

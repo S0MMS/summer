@@ -19,6 +19,9 @@
 @property (weak) IBOutlet NSTextField *ratio;
 @property (weak) IBOutlet NSTextField *x2SumModifier;
 @property (weak) IBOutlet NSStepper *stepper;
+@property (weak) IBOutlet NSTextField *hLinesField;
+
+
 - (IBAction)buttonTapped:(id)sender;
 - (IBAction)valueChanged:(id)sender;
 

@@ -56,7 +56,18 @@
         
         // show cdf
         if (self.showCDF) {
-            NSLog(@"booyaa!");
+            double n = log2([self.permutations count]);
+            double nSquared = n * n;
+            double increment = ([self.permutations count]/2)/nSquared;
+            
+            double meanX = 3.3;
+            double meanY = 0.3;
+            
+            for (int i=1; i<=nSquared; i++) {
+                double x = meanX + i*increment;
+                double y = meanY + cdf(x, meanX, 0.3);
+            }
+            NSLog(@"n = %f", n);
         }
     }
 }
@@ -164,5 +175,9 @@
     NSLog(@"sorted = %@", sorted);
     return sorted;
 }
+//
+//double cdf(double x, double mean, double stdDev) {
+//    return (1/2)*(1 + erfc( (x - mean)/(stdDev * M_SQRT2) ));
+//}
 
 @end
