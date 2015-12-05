@@ -15,6 +15,8 @@
 @property NSMutableArray *components;
 @property NSMutableArray *permutations;
 @property NSMutableArray *adjustedPermutations;
+@property NSMutableArray *hLines;
+@property NSMutableArray *vLines;
 @property NSMutableArray *data;
 
 @end;
@@ -44,6 +46,15 @@
     
     self.varianceValue.stringValue = @"";
     
+    
+    [NSEvent addGlobalMonitorForEventsMatchingMask:(NSKeyDownMask) handler:^(NSEvent *event){
+//        [self keyWasPressedFunction: event];
+        //Or just put your code here
+        NSLog(@"key press %@", event);
+    }];
+    
+    
+    
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -54,12 +65,19 @@
 
 - (IBAction)buttonTapped:(id)sender {
     [self readComponents];
+    [self readHLines];
+    [self readVLines];
+    
     [self calculatePermutations];
     [self calculateStuff];
     [self calculateStats];
     [self.stepper setIntegerValue:0];
     
+
+    
     self.sumView.permutations = self.permutations;
+    self.sumView.hLines = self.hLines;
+    self.sumView.vLines = self.vLines;
     [self.sumView setNeedsDisplay:YES];
 }
 
@@ -71,6 +89,28 @@
     for (NSString *c in components) {
         NSNumber *n = [NSNumber numberWithInteger:[c integerValue]];
         [self.components addObject:n];
+    }
+}
+
+-(void) readHLines {
+    self.hLines = [[NSMutableArray alloc] init];
+    
+    NSString *text = self.hLinesField.stringValue;
+    NSArray *components = [text componentsSeparatedByString:@","];
+    for (NSString *c in components) {
+        NSNumber *n = [NSNumber numberWithDouble:[c doubleValue]];
+        [self.hLines addObject:n];
+    }
+}
+
+-(void) readVLines {
+    self.vLines = [[NSMutableArray alloc] init];
+    
+    NSString *text = self.vLinesField.stringValue;
+    NSArray *components = [text componentsSeparatedByString:@","];
+    for (NSString *c in components) {
+        NSNumber *n = [NSNumber numberWithDouble:[c doubleValue]];
+        [self.vLines addObject:n];
     }
 }
 

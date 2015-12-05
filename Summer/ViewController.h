@@ -20,6 +20,7 @@
 @property (weak) IBOutlet NSTextField *x2SumModifier;
 @property (weak) IBOutlet NSStepper *stepper;
 @property (weak) IBOutlet NSTextField *hLinesField;
+@property (weak) IBOutlet NSTextField *vLinesField;
 
 
 - (IBAction)buttonTapped:(id)sender;

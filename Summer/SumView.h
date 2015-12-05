@@ -11,7 +11,8 @@
 @interface SumView : NSView
 
 @property (nonatomic, strong) NSArray *permutations;
-
+@property (nonatomic, strong) NSArray *hLines;
+@property (nonatomic, strong) NSArray *vLines;
 @property BOOL showGrid;
 @property BOOL showPermutations;
 @property BOOL showSorted;
