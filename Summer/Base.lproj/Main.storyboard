@@ -925,6 +925,14 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="op6-vh-U9p">
+                                <rect key="frame" x="855" y="441" width="60" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0.66" id="NFL-Vq-QBr">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
@@ -937,6 +945,7 @@
                         <outlet property="permutationsField" destination="FtG-6e-weX" id="qDO-Ih-tZL"/>
                         <outlet property="ratio" destination="8Na-v5-W09" id="0ou-gE-gJ9"/>
                         <outlet property="sortedCheckbox" destination="GvA-7k-qCE" id="gwf-jO-tfJ"/>
+                        <outlet property="stdDev2PercentValue" destination="op6-vh-U9p" id="Mnx-mk-tfK"/>
                         <outlet property="stdDevPercentValue" destination="djR-tR-gCM" id="YlF-yn-wIA"/>
                         <outlet property="stdDevValue" destination="dNA-ED-iPt" id="uXr-ZW-Dzi"/>
                         <outlet property="stepper" destination="ivp-Mf-cIy" id="ebf-rn-Po2"/>

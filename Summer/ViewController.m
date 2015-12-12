@@ -20,7 +20,8 @@
 @property NSMutableArray *data;
 @property double mean;
 @property double stdDev;
-@property double stdDevPercent;
+@property double stdDev1Percent;
+@property double stdDev2Percent;
 
 @end;
 
@@ -49,6 +50,7 @@
     self.varianceValue.stringValue = @"";
     self.stdDevValue.stringValue = @"";
     self.stdDevPercentValue.stringValue = @"";
+    self.stdDev2PercentValue.stringValue = @"";
     
     
     [NSEvent addGlobalMonitorForEventsMatchingMask:(NSKeyDownMask) handler:^(NSEvent *event){
@@ -73,7 +75,7 @@
     [self readVLines];
     
     [self calculatePermutations];
-    [self calculateStuff];
+//    [self calculateStuff];
     [self calculateStats];
     [self.stepper setIntegerValue:0];
     
@@ -195,17 +197,22 @@
     self.stdDevValue.stringValue = [NSString stringWithFormat:@"%f", self.stdDev];
     
     // calculate percent of values between u - o and u + o
-    int count = 0;
+    int std1Count,std2Count = 0;
     for (NSNumber *p in self.permutations) {
         double n = [p doubleValue];
         if ( ((self.mean - self.stdDev) <= n) && (n <= (self.mean + self.stdDev)) ) {
-            count++;
+            std1Count++;
         }
+        if ( ((self.mean - 2.0*self.stdDev) <= n) && (n <= (self.mean + 2.0*self.stdDev)) ) {
+            std2Count++;
+        }
+        
     }
-    NSLog(@"count within u - o and u + o = %d", count);
-    self.stdDevPercent = (double)count/(double)[self.permutations count];
-    NSLog(@"%f", self.stdDevPercent);
-    self.stdDevPercentValue.stringValue = [NSString stringWithFormat:@"%f", self.stdDevPercent];
+    NSLog(@"count within u - o and u + o = %d", std1Count);
+    self.stdDev1Percent = (double)std1Count/(double)[self.permutations count];
+    self.stdDev2Percent = (double)std2Count/(double)[self.permutations count];
+    self.stdDevPercentValue.stringValue = [NSString stringWithFormat:@"%f", self.stdDev1Percent];
+    self.stdDev2PercentValue.stringValue = [NSString stringWithFormat:@"%f", self.stdDev2Percent];
 }
 
 

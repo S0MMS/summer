@@ -45,6 +45,7 @@
 @property (weak) IBOutlet NSTextField *varianceValue;
 @property (weak) IBOutlet NSTextField *stdDevValue;
 @property (weak) IBOutlet NSTextField *stdDevPercentValue;
+@property (weak) IBOutlet NSTextField *stdDev2PercentValue;
 
 
 @end
