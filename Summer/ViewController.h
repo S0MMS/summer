@@ -44,6 +44,7 @@
 @property (weak) IBOutlet NSTextField *meanValue;
 @property (weak) IBOutlet NSTextField *varianceValue;
 @property (weak) IBOutlet NSTextField *stdDevValue;
+@property (weak) IBOutlet NSTextField *stdDevPercentValue;
 
 
 @end

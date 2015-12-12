@@ -195,7 +195,7 @@
         return NSOrderedSame;
     }];
 
-    NSLog(@"sorted = %@", sorted);
+//    NSLog(@"sorted = %@", sorted);
     return sorted;
 }
 //

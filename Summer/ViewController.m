@@ -18,6 +18,9 @@
 @property NSMutableArray *hLines;
 @property NSMutableArray *vLines;
 @property NSMutableArray *data;
+@property double mean;
+@property double stdDev;
+@property double stdDevPercent;
 
 @end;
 
@@ -42,9 +45,10 @@
     self.cdfCheckbox.state = YES;
     self.sumView.showCDF = self.cdfCheckbox.state;
     
-    self.meanValue.stringValue = @"";
-    
+    self.meanValue.stringValue = @"";    
     self.varianceValue.stringValue = @"";
+    self.stdDevValue.stringValue = @"";
+    self.stdDevPercentValue.stringValue = @"";
     
     
     [NSEvent addGlobalMonitorForEventsMatchingMask:(NSKeyDownMask) handler:^(NSEvent *event){
@@ -170,15 +174,15 @@
     }
     
     NSLog(@"height = %f", height);
-    double mean = height/2.0;
+    self.mean = height/2.0;
     
-    self.meanValue.stringValue = [NSString stringWithFormat:@"%f", mean];
+    self.meanValue.stringValue = [NSString stringWithFormat:@"%f", self.mean];
     
     // calculate variance
     double x2sum = 0;
     for (NSNumber *p in self.permutations) {
         double n = [p doubleValue];
-        double diff = (mean - n);
+        double diff = (self.mean - n);
         x2sum = x2sum + pow(diff, 2);
     }
     
@@ -187,9 +191,23 @@
     
     
     // calculate std dev
-    double stdDev = sqrt(variance);
-    self.stdDevValue.stringValue = [NSString stringWithFormat:@"%f", stdDev];
+    self.stdDev = sqrt(variance);
+    self.stdDevValue.stringValue = [NSString stringWithFormat:@"%f", self.stdDev];
+    
+    // calculate percent of values between u - o and u + o
+    int count = 0;
+    for (NSNumber *p in self.permutations) {
+        double n = [p doubleValue];
+        if ( ((self.mean - self.stdDev) <= n) && (n <= (self.mean + self.stdDev)) ) {
+            count++;
+        }
+    }
+    NSLog(@"count within u - o and u + o = %d", count);
+    self.stdDevPercent = (double)count/(double)[self.permutations count];
+    NSLog(@"%f", self.stdDevPercent);
+    self.stdDevPercentValue.stringValue = [NSString stringWithFormat:@"%f", self.stdDevPercent];
 }
+
 
 - (IBAction)valueChanged:(id)sender {
     NSStepper *stepper = (NSStepper *)sender;
