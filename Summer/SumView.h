@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSArray *permutations;
 @property (nonatomic, strong) NSArray *hLines;
 @property (nonatomic, strong) NSArray *vLines;
+@property (nonatomic, strong) NSArray *approximationPoints;
 @property BOOL scaleY;
 @property BOOL showGrid;
 @property BOOL showPermutations;

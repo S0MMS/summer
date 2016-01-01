@@ -83,30 +83,15 @@
                 [line stroke];
             }
         }
-//        // show cdf
-//        if (self.showCDF) {
-//            double n = log2([self.permutations count]);
-//            double nSquared = n * n;
-//            double increment = ([self.permutations count]/2)/nSquared;
-//            
-//            double meanX = 3.3;
-//            double meanY = 0.3;
-//            
-//            for (int i=1; i<=nSquared; i++) {
-//                double x = meanX + i*increment;
-//                double y = meanY + cdf(x, meanX, 0.3);
-//            }
-//            NSLog(@"n = %f", n);
-//        }
         
         if (self.showCDF) {
             
             NSMutableArray *approximationPoints = [[NSMutableArray alloc] init];
+            NSMutableArray *complementPoints = [[NSMutableArray alloc] init];
             NSInteger n = [self.components count];
-            NSLog(@"n = %ld", (long)n);
             
             double upperBound = self.mean;
-            NSNumber *number = [self.permutations objectAtIndex:3];
+            NSNumber *number = [self.permutations objectAtIndex:2];
             double lowerBound = [number doubleValue];
             double range = (upperBound - lowerBound);
             double step = range/n;
@@ -116,14 +101,59 @@
             for (int i = 1; i<n; i++) {
                 cdfX = lowerBound + (i * step);
                 double cdfY = [self CDFWithMean:self.mean variance:self.variance x:cdfX];
-                NSLog(@"x,y = %f, %f", cdfY*xScale, cdfX);
                 MyPoint *p = [[MyPoint alloc] init];
-                p.point =  CGPointMake(cdfX, cdfY);
+                p.point =  CGPointMake(cdfY*xScale, cdfX);
                 [approximationPoints addObject:p];
+                
+                if (i != n) {
+                    double comCDFX = pow(2,n-1) + (pow(2, n-1) - cdfY*xScale);
+                    double comCDFY = self.mean + (self.mean - cdfX);
+                    MyPoint *comp = [[MyPoint alloc] init];
+                    comp.point = CGPointMake(comCDFX, comCDFY);
+                    [complementPoints insertObject:comp atIndex:0];
+                }
             }
             
+            // add complement
+            [approximationPoints addObjectsFromArray:complementPoints];
             
             
+            // draw
+            MyPoint *previousPoint = [[MyPoint alloc] init];
+            previousPoint.point = CGPointMake(3, lowerBound);
+            for (int i=0; i<[approximationPoints count]; i++) {
+                MyPoint *p = [approximationPoints objectAtIndex:i];
+                
+                line = [NSBezierPath bezierPath];
+                if (i % 2) {
+                    [line setLineWidth:1.5];
+                    [[NSColor redColor] set];
+                } else {
+                    [line setLineWidth:2.0];
+                    [[NSColor colorWithCalibratedRed:0.1 green:0.70 blue:0.1 alpha:1.0f] set];
+                }
+                [line moveToPoint:NSMakePoint(previousPoint.point.x * self.gridCellWidth, previousPoint.point.y * self.gridCellHeight)];
+                [line lineToPoint:NSMakePoint(p.point.x * self.gridCellWidth, p.point.y * self.gridCellHeight)];
+                [line stroke];
+                previousPoint = p;
+            }
+            
+            // draw last point
+            line = [NSBezierPath bezierPath];
+            if ([approximationPoints count] % 2) {
+                [line setLineWidth:1.5];
+                [[NSColor redColor] set];
+            } else {
+                [line setLineWidth:2.0];
+                [[NSColor colorWithCalibratedRed:0.0 green:0.75 blue:0.0 alpha:1.0f] set];
+            }
+
+            MyPoint *lastPoint = [[MyPoint alloc] init];
+            lastPoint.point = CGPointMake(pow(2, n)-3, self.mean + (self.mean - lowerBound));
+            
+            [line moveToPoint:NSMakePoint(previousPoint.point.x * self.gridCellWidth, previousPoint.point.y * self.gridCellHeight)];
+            [line lineToPoint:NSMakePoint(lastPoint.point.x * self.gridCellWidth, lastPoint.point.y * self.gridCellHeight)];
+            [line stroke];            
         }
     }
 }
@@ -238,7 +268,7 @@
 //    NSLog(@"sorted = %@", sorted);
     return sorted;
 }
-//
+
 //double cdf(double x, double mean, double stdDev) {
 //    return (1/2)*(1 + erfc( (x - mean)/(stdDev * M_SQRT2) ));
 //}

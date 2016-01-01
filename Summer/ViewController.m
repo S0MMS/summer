@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "MyPoint.h"
 #import <math.h>
 
 
@@ -18,6 +19,7 @@
 @property NSMutableArray *hLines;
 @property NSMutableArray *vLines;
 @property NSMutableArray *data;
+@property NSMutableArray *approximationPoints;
 @property double mean;
 @property double variance;
 @property double stdDev;
@@ -75,14 +77,19 @@
 
 - (IBAction)buttonTapped:(id)sender {
     [self readComponents];
+//    [self calculateRandom];
+    
     [self readHLines];
     [self readVLines];
     
     [self calculatePermutations];
-//    [self calculateStuff];
-    [self calculateStats];
-    [self.stepper setIntegerValue:0];
+
     
+    [self calculateStuff];
+    [self calculateStats];
+    [self calculateApproximation];
+    [self.stepper setIntegerValue:0];
+
 
     self.sumView.components = self.components;
     self.sumView.mean = self.mean;
@@ -91,6 +98,8 @@
     self.sumView.permutations = self.permutations;
     self.sumView.hLines = self.hLines;
     self.sumView.vLines = self.vLines;
+    self.sumView.approximationPoints = self.approximationPoints;
+    
     [self.sumView setNeedsDisplay:YES];
 }
 
@@ -101,8 +110,37 @@
     NSArray *components = [text componentsSeparatedByString:@","];
     for (NSString *c in components) {
         NSNumber *n = [NSNumber numberWithInteger:[c integerValue]];
+//        NSInteger *value = [c intValue];
+//        [self.components addObject:value];
+//        [self.components addObject:intValue];
         [self.components addObject:n];
     }
+}
+
+-(void)calculateRandom {
+    NSMutableArray *randomComponents = [[NSMutableArray alloc] init];
+    
+    int r1 = arc4random_uniform(20);
+    int r2 = r1 + arc4random_uniform(20);
+    [randomComponents addObject:[NSNumber numberWithInteger:r1]];
+    [randomComponents addObject:[NSNumber numberWithInteger:r2]];
+    
+    int sum = r1 + r2;
+    int lastRandom = r2;
+//    int lowerBound = r1 + r2;
+    for (int i=2; i<[self.components count]; i++) {
+        NSLog(@"sum = %d", sum);
+        // bigger than previous number, less than sum
+        int newRandom = lastRandom + arc4random_uniform(sum - lastRandom + 1);
+        NSLog(@"newRandom = %d", newRandom);
+        NSNumber *n = [NSNumber numberWithInteger:newRandom];
+        sum = sum + newRandom;
+        lastRandom = newRandom;
+        [randomComponents addObject:n];
+    }
+    
+    self.components = randomComponents;
+    self.numberField.stringValue = [self.components componentsJoinedByString:@","];
 }
 
 -(void) readHLines {
@@ -136,7 +174,8 @@
         NSMutableArray *tempPerms = [[NSMutableArray alloc] initWithArray:self.permutations];
 
         for (NSNumber *p in self.permutations) {
-            NSNumber *newPermutation = [NSNumber numberWithInteger:([p integerValue] + [n integerValue])];;
+            NSNumber *newPermutation = [NSNumber numberWithInteger:([p integerValue] + [n integerValue])];
+//            NSNumber *newPermutation = [p decimalNumberByAdding: n];
             [tempPerms addObject:newPermutation];
         }
         
@@ -171,6 +210,21 @@
     self.x4Sum.stringValue = [NSString stringWithFormat:@"%ld", x4sum];
     
     
+    // calculate averages
+    double permutations =  pow(2, (int)[self.components count]);
+    double x2StdDeviation = pow(x2sum/permutations, 0.5);
+    self.x2stdDeviation.stringValue = [NSString stringWithFormat:@"%f", x2StdDeviation];
+    
+    double absAverage = x1AbsSum / permutations;
+    self.xabsAverage.stringValue = [NSString stringWithFormat:@"%f", absAverage];
+    
+    double x1Average = x1sum / permutations;
+    self.xAverage.stringValue = [NSString stringWithFormat:@"%f", x1Average];
+    
+    double approxAvg = [self calculateApproximationAverage];
+    self.approxAverage.stringValue = [NSString stringWithFormat:@"%f", approxAvg];
+    
+    
     // calculate ratios
     
     double ratio12 = (1.0 * x2sum)/x1sum;
@@ -186,7 +240,33 @@
     double ratio24 = (1.0 * x4sum)/x2sum;
     self.ratio24.stringValue = [NSString stringWithFormat:@"%lf", ratio24];
     
+    
     NSLog(@"uh");
+}
+
+-(double) calculateApproximationAverage
+{
+    NSInteger v = -1*[self.stepper integerValue];
+    
+    NSLog(@"T = %ld", (long)v);
+    
+    NSLog(@"points = %@", self.approximationPoints);
+    MyPoint *belowPoint = nil;
+    MyPoint *abovePoint = nil;
+    for (int i=0; i<[self.approximationPoints count]; i++) {
+        MyPoint *point = [self.approximationPoints objectAtIndex:i];
+        if (point.point.y <= v) {
+            belowPoint = point;
+        }
+        if (point.point.y > v) {
+            abovePoint = point;
+            break;
+        }
+    }
+    NSLog(@"above point = %f, %f", abovePoint.point.x, abovePoint.point.y);
+    NSLog(@"below point = %f, %f", belowPoint.point.x, belowPoint.point.y);
+    
+    return 0.17;
 }
 
 -(void) calculateStats {
@@ -237,6 +317,48 @@
     self.stdDev2PercentValue.stringValue = [NSString stringWithFormat:@"%f", self.stdDev2Percent];
 }
 
+
+-(void)calculateApproximation
+{
+    self.approximationPoints = [[NSMutableArray alloc] init];
+    NSMutableArray *complementPoints = [[NSMutableArray alloc] init];
+    NSInteger n = [self.components count];
+    
+    double upperBound = self.mean;
+    NSNumber *number = [self.permutations objectAtIndex:2];
+    double lowerBound = [number doubleValue];
+    double range = (upperBound - lowerBound);
+    double step = range/n;
+    double xScale = pow(2, n);
+    
+    double cdfX  = 0;
+    for (int i = 1; i<=n; i++) {
+        cdfX = lowerBound + (i * step);
+        double cdfY = [self CDFWithMean:self.mean variance:self.variance x:cdfX];
+        MyPoint *p = [[MyPoint alloc] init];
+        p.point =  CGPointMake(cdfY*xScale, cdfX);
+        [self.approximationPoints addObject:p];
+        
+        if (i != n) {
+            double comCDFX = pow(2,n-1) + (pow(2, n-1) - cdfY*xScale);
+            double comCDFY = self.mean + (self.mean - cdfX);
+            MyPoint *comp = [[MyPoint alloc] init];
+            comp.point = CGPointMake(comCDFX, comCDFY);
+            [complementPoints insertObject:comp atIndex:0];
+        }
+    }
+    
+    // add complement
+    [self.approximationPoints addObjectsFromArray:complementPoints];
+    
+    NSLog(@"approximation = %@", self.approximationPoints);
+    NSLog(@"");
+}
+
+-(double) CDFWithMean:(double)mean variance:(double)variance x:(double)x
+{
+    return 0.5 * erfc(((mean - x)/sqrt(variance)) * M_SQRT1_2);
+}
 
 - (IBAction)valueChanged:(id)sender {
     NSStepper *stepper = (NSStepper *)sender;

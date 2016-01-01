@@ -25,6 +25,10 @@
 @property (weak) IBOutlet NSTextField *ratio23;
 @property (weak) IBOutlet NSTextField *ratio12;
 
+@property (weak) IBOutlet NSTextField *x2stdDeviation;
+@property (weak) IBOutlet NSTextField *xabsAverage;
+@property (weak) IBOutlet NSTextField *xAverage;
+@property (weak) IBOutlet NSTextField *approxAverage;
 
 
 @property (weak) IBOutlet NSStepper *stepper;
