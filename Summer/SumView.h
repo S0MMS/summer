@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSArray *permutations;
 @property (nonatomic, strong) NSArray *hLines;
 @property (nonatomic, strong) NSArray *vLines;
+@property BOOL scaleY;
 @property BOOL showGrid;
 @property BOOL showPermutations;
 @property BOOL showSorted;

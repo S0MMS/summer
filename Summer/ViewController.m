@@ -33,6 +33,9 @@
 
     // Do any additional setup after loading the view.
     [self.view.window makeFirstResponder:self];
+
+    self.scaleYCheckbox.state = YES;
+    self.sumView.scaleY = self.gridCheckbox.state;
     
     self.gridCheckbox.state = YES;
     self.sumView.showGrid = self.gridCheckbox.state;
@@ -75,7 +78,7 @@
     [self readVLines];
     
     [self calculatePermutations];
-//    [self calculateStuff];
+    [self calculateStuff];
     [self calculateStats];
     [self.stepper setIntegerValue:0];
     
@@ -158,14 +161,15 @@
     self.x4Sum.stringValue = [NSString stringWithFormat:@"%ld", x4sum];
     
     
-    double ratio = x4sum/x2sum;
-    self.ratio.stringValue = [NSString stringWithFormat:@"%lf", ratio];
+    float ratio24 = (1.0 * x4sum)/x2sum;
+    self.ratio24.stringValue = [NSString stringWithFormat:@"%lf", ratio24];
     
     
-    double x2SumModifier = x2sum/ratio;
-    self.x2SumModifier.stringValue = [NSString stringWithFormat:@"%lf", x2SumModifier];
+    double ratio12 = (1.0 * x2sum)/x1sum;
+    self.ratio12.stringValue = [NSString stringWithFormat:@"%lf", ratio12];
+    NSLog(@"most important in the world = %lf", ratio12);
     
-//    NSLog(@"data = %@", components);
+    NSLog(@"uh");
 }
 
 -(void) calculateStats {
@@ -276,6 +280,11 @@ double cdf(double x, double mean, double stdDev) {
 
 - (IBAction)cdfCheckboxTapped:(id)sender {
     self.sumView.showCDF = self.cdfCheckbox.state;
+    [self.sumView setNeedsDisplay:YES];
+}
+
+- (IBAction)scaleYCheckboxTapped:(id)sender {
+    self.sumView.scaleY = self.scaleYCheckbox.state;
     [self.sumView setNeedsDisplay:YES];
 }
 

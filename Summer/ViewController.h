@@ -16,18 +16,21 @@
 @property (weak) IBOutlet NSTextField *x2Sum;
 @property (weak) IBOutlet NSTextField *x4Sum;
 @property (weak) IBOutlet NSTextField *x1Sum;
-@property (weak) IBOutlet NSTextField *ratio;
-@property (weak) IBOutlet NSTextField *x2SumModifier;
+@property (weak) IBOutlet NSTextField *ratio24;
+@property (weak) IBOutlet NSTextField *ratio12;
 @property (weak) IBOutlet NSStepper *stepper;
 @property (weak) IBOutlet NSTextField *hLinesField;
 @property (weak) IBOutlet NSTextField *vLinesField;
-
 
 - (IBAction)buttonTapped:(id)sender;
 - (IBAction)valueChanged:(id)sender;
 
 @property (weak) IBOutlet NSTextField *permutationsField;
 @property (weak) IBOutlet SumView *sumView;
+
+
+@property (weak) IBOutlet NSButton *scaleYCheckbox;
+- (IBAction)scaleYCheckboxTapped:(id)sender;
 
 @property (weak) IBOutlet NSButton *gridCheckbox;
 - (IBAction)gridCheckboxTapped:(id)sender;

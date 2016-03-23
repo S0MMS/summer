@@ -27,7 +27,12 @@
         
         NSString *hiValStr = [self.permutations lastObject];
         double hiVal = [hiValStr doubleValue];
-        self.gridCellHeight = self.frame.size.height/hiVal;
+        
+        if (self.scaleY) {
+            self.gridCellHeight = self.frame.size.height/hiVal;
+        } else {
+            self.gridCellHeight = self.gridCellWidth;
+        }
         
         if (self.showGrid) {
             [self drawGrid];
@@ -125,8 +130,15 @@
     
     
     // draw horizontal lines
-    NSString *maxString = [self.permutations lastObject];
-    NSInteger max = [maxString integerValue];
+    NSNumber *maxNum = [NSNumber numberWithInt:0];
+    if (self.scaleY) {
+//        NSString *maxString = [self.permutations lastObject];
+        maxNum = [self.permutations lastObject];
+    } else {
+        maxNum = [NSNumber numberWithInt:(self.frame.size.height/self.gridCellHeight)];
+    }
+    int max = [maxNum intValue];
+//    NSInteger max = [maxString integerValue];
     for (int i = 1; i <= max; i++) {
         float y = i * self.gridCellHeight;
         [line moveToPoint:NSMakePoint(NSMinX([self bounds]), y)];
