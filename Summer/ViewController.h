@@ -13,8 +13,9 @@
 
 @property (weak) IBOutlet NSTextField *numberField;
 @property (weak) IBOutlet NSButton *actionButton;
-@property (weak) IBOutlet NSTextField *x2Sum;
 @property (weak) IBOutlet NSTextField *x4Sum;
+@property (weak) IBOutlet NSTextField *x3Sum;
+@property (weak) IBOutlet NSTextField *x2Sum;
 @property (weak) IBOutlet NSTextField *x1Sum;
 @property (weak) IBOutlet NSTextField *ratio24;
 @property (weak) IBOutlet NSTextField *ratio12;
@@ -24,6 +25,7 @@
 
 - (IBAction)buttonTapped:(id)sender;
 - (IBAction)valueChanged:(id)sender;
+- (IBAction)makeDataTapped:(id)sender;
 
 @property (weak) IBOutlet NSTextField *permutationsField;
 @property (weak) IBOutlet SumView *sumView;

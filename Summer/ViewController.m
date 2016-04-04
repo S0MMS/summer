@@ -161,13 +161,12 @@
     self.x4Sum.stringValue = [NSString stringWithFormat:@"%ld", x4sum];
     
     
-    float ratio24 = (1.0 * x4sum)/x2sum;
+    double ratio24 = (1.0 * x4sum)/x2sum;
     self.ratio24.stringValue = [NSString stringWithFormat:@"%lf", ratio24];
     
     
     double ratio12 = (1.0 * x2sum)/x1sum;
     self.ratio12.stringValue = [NSString stringWithFormat:@"%lf", ratio12];
-    NSLog(@"most important in the world = %lf", ratio12);
     
     NSLog(@"uh");
 }
@@ -239,7 +238,114 @@
     [self calculateStuff];
 }
 
+- (IBAction)makeDataTapped:(id)sender
+{
+//    [self doFileStuff];
+    [self moarWriteToFile];
+}
 
+-(void)doFileStuff
+{
+    NSFileHandle *file;
+    //object for File Handle
+    NSError *error;
+    //crearing error object for string with file contents format
+    NSMutableData *writingdatatofile;
+    
+    
+    //create mutable object for ns data
+    NSString *filePath=[NSString stringWithFormat:@"/Users/cshreve/cks9247/data/doc.txt"];
+    //telling about File Path for Reading for easy of access
+    file = [NSFileHandle fileHandleForReadingAtPath:@"/Users/cshreve/cks9247/data/doc.txt"];
+    
+    //assign file path directory
+    if (file == nil) //check file exist or not
+        NSLog(@"Failed to open file");
+    
+    NSString *getfileContents = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
+    
+    //access file contents with out ns handle method
+    if (error) //check error flag for file present or not
+        NSLog(@"Error reading file: %@", error.localizedDescription);
+    NSLog(@"**** DATA ****");
+    NSLog(@"%@", getfileContents);
+    NSLog(@"**** DATA ****");
+    
+    //display file contents in main file
+    NSArray *listArray = [getfileContents componentsSeparatedByString:@"\n"];
+    //caluculate list of line present in files
+    NSLog(@"items = %ld", [listArray count]);
+    
+    
+    
+    const char *writingchar = "how are you";
+    writingdatatofile = [NSMutableData dataWithBytes:writingchar length:strlen(writingchar)];
+    
+    //convert string format into ns mutable data format
+    file = [NSFileHandle fileHandleForUpdatingAtPath: @"/Users/cshreve/cks9247/data/new.txt"];
+    
+    //set writing path to file
+    if (file == nil) //check file present or not in file
+        NSLog(@"Failed to open file");
+    
+    [file seekToFileOffset: 6];
+    
+    //object pointer initialy points the offset as 6 position in file
+    [file writeData: writingdatatofile];
+    
+    //writing data to new file
+    [file closeFile];
+    //close the file
+    
+}
+-(void)moarWriteToFile
+{
+    
+    NSString *str = [NSString stringWithFormat:@"%@\n",@"blargeherhe"]; //get text from textField
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains
+    (NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    //file name to write the data to using the documents directory:
+//    NSString *fileName = [NSString stringWithFormat:@"%@/textfile.txt",
+//                          documentsDirectory];
+    
+    NSString *fileName = @"/Users/cshreve/cks9247/data/new.txt";
+    
+    // check for file exist
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:fileName]) {
+        
+        // the file doesn't exist,we can write out the text using the  NSString convenience method
+        
+        NSError *error = noErr;
+        BOOL success = [str writeToFile:fileName atomically:YES encoding:NSUTF8StringEncoding error:&error];
+        if (!success) {
+            // handle the error
+            NSLog(@"%@", error);
+        }
+        
+    } else {
+        
+        // the file already exists, append the text to the end
+        
+        // get a handle
+        NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:fileName];
+        
+        // move to the end of the file
+        [fileHandle seekToEndOfFile];
+        
+        // convert the string to an NSData object
+        NSData *textData = [str dataUsingEncoding:NSUTF8StringEncoding];
+        
+        // write the data to the end of the file
+        [fileHandle writeData:textData];
+        
+        // clean up
+        [fileHandle closeFile];
+    }
+}
 
 -(void)keyDown:(NSEvent*)event {
     NSLog(@"key = %@", event);
