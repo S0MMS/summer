@@ -15,6 +15,7 @@
 		BF5ADB031BF7BCBF0042757B /* SummerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5ADB021BF7BCBF0042757B /* SummerTests.m */; };
 		BF5ADB0E1BF7BCBF0042757B /* SummerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5ADB0D1BF7BCBF0042757B /* SummerUITests.m */; };
 		BF8F6CF81BFFFAB500144647 /* SumView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8F6CF71BFFFAB500144647 /* SumView.m */; };
+		BF91EAFB1CDC0315009C0538 /* MyPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = BF91EAFA1CDC0315009C0538 /* MyPoint.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,8 @@
 		BF5ADB0F1BF7BCBF0042757B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF8F6CF61BFFFAB500144647 /* SumView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SumView.h; sourceTree = "<group>"; };
 		BF8F6CF71BFFFAB500144647 /* SumView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SumView.m; sourceTree = "<group>"; };
+		BF91EAF91CDC0315009C0538 /* MyPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPoint.h; sourceTree = "<group>"; };
+		BF91EAFA1CDC0315009C0538 /* MyPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPoint.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +115,8 @@
 				BF5ADAEE1BF7BCBE0042757B /* Supporting Files */,
 				BF8F6CF61BFFFAB500144647 /* SumView.h */,
 				BF8F6CF71BFFFAB500144647 /* SumView.m */,
+				BF91EAF91CDC0315009C0538 /* MyPoint.h */,
+				BF91EAFA1CDC0315009C0538 /* MyPoint.m */,
 			);
 			path = Summer;
 			sourceTree = "<group>";
@@ -274,6 +279,7 @@
 				BF8F6CF81BFFFAB500144647 /* SumView.m in Sources */,
 				BF5ADAF31BF7BCBE0042757B /* ViewController.m in Sources */,
 				BF5ADAF01BF7BCBE0042757B /* main.m in Sources */,
+				BF91EAFB1CDC0315009C0538 /* MyPoint.m in Sources */,
 				BF5ADAED1BF7BCBE0042757B /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

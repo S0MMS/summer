@@ -19,6 +19,7 @@
 @property NSMutableArray *vLines;
 @property NSMutableArray *data;
 @property double mean;
+@property double variance;
 @property double stdDev;
 @property double stdDev1Percent;
 @property double stdDev2Percent;
@@ -78,11 +79,14 @@
     [self readVLines];
     
     [self calculatePermutations];
-    [self calculateStuff];
+//    [self calculateStuff];
     [self calculateStats];
     [self.stepper setIntegerValue:0];
     
 
+    self.sumView.components = self.components;
+    self.sumView.mean = self.mean;
+    self.sumView.variance = self.variance;
     
     self.sumView.permutations = self.permutations;
     self.sumView.hLines = self.hLines;
@@ -146,27 +150,41 @@
 -(void) calculateStuff {
 
     long x1sum = 0;
+    long x1AbsSum = 0;
     long x2sum = 0;
+    long x3sum = 0;
     long x4sum = 0;
     self.data = [[NSMutableArray alloc] init];
     for (NSNumber *s in self.adjustedPermutations) {
         NSInteger n = [s integerValue];
-        x1sum += (n);
-        x2sum += (n * n);
-        x4sum += (n * n * n * n);
+        x1sum += n;
+        x1AbsSum += abs((int)n);
+        x2sum += pow(n, 2);
+        x3sum += pow(n, 3);
+        x4sum += pow(n, 4);
     }
     
     self.x1Sum.stringValue = [NSString stringWithFormat:@"%ld", x1sum];
+    self.x1AbsSum.stringValue = [NSString stringWithFormat:@"%ld", x1AbsSum];
     self.x2Sum.stringValue = [NSString stringWithFormat:@"%ld", x2sum];
+    self.x3Sum.stringValue = [NSString stringWithFormat:@"%ld", x3sum];
     self.x4Sum.stringValue = [NSString stringWithFormat:@"%ld", x4sum];
+    
+    
+    // calculate ratios
+    
+    double ratio12 = (1.0 * x2sum)/x1sum;
+    self.ratio12.stringValue = [NSString stringWithFormat:@"%lf", ratio12];
+
+    double ratio23 = (1.0 * x3sum)/x2sum;
+    self.ratio23.stringValue = [NSString stringWithFormat:@"%lf", ratio23];
+    
+    double ratio34 = (1.0 * x4sum)/x3sum;
+    self.ratio34.stringValue = [NSString stringWithFormat:@"%lf", ratio34];
     
     
     double ratio24 = (1.0 * x4sum)/x2sum;
     self.ratio24.stringValue = [NSString stringWithFormat:@"%lf", ratio24];
-    
-    
-    double ratio12 = (1.0 * x2sum)/x1sum;
-    self.ratio12.stringValue = [NSString stringWithFormat:@"%lf", ratio12];
     
     NSLog(@"uh");
 }
@@ -192,6 +210,7 @@
     }
     
     double variance = x2sum/([self.permutations count]);
+    self.variance = variance;
     self.varianceValue.stringValue = [NSString stringWithFormat:@"%f", variance];
     
     
@@ -228,8 +247,11 @@
     for (NSString *p in self.permutations) {
         NSInteger adjustedValue = [p integerValue] + v;
         
-        NSString *abs = [NSString stringWithFormat:@"%ld", labs(adjustedValue)];
-        [self.adjustedPermutations addObject:abs];
+        NSString *val = [NSString stringWithFormat:@"%ld", adjustedValue];
+        [self.adjustedPermutations addObject:val];
+        
+//        NSString *abs = [NSString stringWithFormat:@"%ld", labs(adjustedValue)];
+//        [self.adjustedPermutations addObject:abs];
     }
     NSLog(@"adjusted perm = %@", self.adjustedPermutations);
     
@@ -383,9 +405,9 @@ double cdf(double x, double mean, double stdDev) {
     return (1/2)*(1 + erfc( (x - mean)/(stdDev * M_SQRT2) ));
 }
 
-
 - (IBAction)cdfCheckboxTapped:(id)sender {
     self.sumView.showCDF = self.cdfCheckbox.state;
+    self.sumView.components = self.components;
     [self.sumView setNeedsDisplay:YES];
 }
 

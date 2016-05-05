@@ -7,6 +7,7 @@
 //
 
 #import "SumView.h"
+#import "MyPoint.h"
 
 @interface SumView ()
 @property double gridCellWidth;
@@ -44,7 +45,7 @@
         // show permutations
         if (self.showPermutations) {
             line = [NSBezierPath bezierPath];
-            [line setLineWidth:1.0];
+            [line setLineWidth:1.25];
             [[NSColor blackColor] set];
             [self drawArray:self.permutations withLine:line];
         }
@@ -97,6 +98,33 @@
 //            }
 //            NSLog(@"n = %f", n);
 //        }
+        
+        if (self.showCDF) {
+            
+            NSMutableArray *approximationPoints = [[NSMutableArray alloc] init];
+            NSInteger n = [self.components count];
+            NSLog(@"n = %ld", (long)n);
+            
+            double upperBound = self.mean;
+            NSNumber *number = [self.permutations objectAtIndex:3];
+            double lowerBound = [number doubleValue];
+            double range = (upperBound - lowerBound);
+            double step = range/n;
+            double xScale = pow(2, n);
+            
+            double cdfX  = 0;
+            for (int i = 1; i<n; i++) {
+                cdfX = lowerBound + (i * step);
+                double cdfY = [self CDFWithMean:self.mean variance:self.variance x:cdfX];
+                NSLog(@"x,y = %f, %f", cdfY*xScale, cdfX);
+                MyPoint *p = [[MyPoint alloc] init];
+                p.point =  CGPointMake(cdfX, cdfY);
+                [approximationPoints addObject:p];
+            }
+            
+            
+            
+        }
     }
 }
 
@@ -116,7 +144,7 @@
 -(void) drawGrid {
 
     NSBezierPath *line = [NSBezierPath bezierPath];
-    [line setLineWidth:0.25];
+    [line setLineWidth:0.20];
     [[NSColor lightGrayColor] set];
     
     
@@ -215,9 +243,16 @@
 //    return (1/2)*(1 + erfc( (x - mean)/(stdDev * M_SQRT2) ));
 //}
 
+-(double) cumulativeNormal:(double )x
+{
+    return 0.5 * erfc(-x * M_SQRT1_2);
+}
 
 
-
+-(double) CDFWithMean:(double)mean variance:(double)variance x:(double)x
+{
+    return 0.5 * erfc(((mean - x)/sqrt(variance)) * M_SQRT1_2);
+}
 
 
 @end

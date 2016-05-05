@@ -17,8 +17,16 @@
 @property (weak) IBOutlet NSTextField *x3Sum;
 @property (weak) IBOutlet NSTextField *x2Sum;
 @property (weak) IBOutlet NSTextField *x1Sum;
+@property (weak) IBOutlet NSTextField *x1AbsSum;
+
 @property (weak) IBOutlet NSTextField *ratio24;
+
+@property (weak) IBOutlet NSTextField *ratio34;
+@property (weak) IBOutlet NSTextField *ratio23;
 @property (weak) IBOutlet NSTextField *ratio12;
+
+
+
 @property (weak) IBOutlet NSStepper *stepper;
 @property (weak) IBOutlet NSTextField *hLinesField;
 @property (weak) IBOutlet NSTextField *vLinesField;
